@@ -1,0 +1,303 @@
+{
+  "info": {
+    "name": "MenuMind API",
+    "description": "Comprehensive Postman collection for the MenuMind FastAPI backend. All endpoints require a valid Supabase JWT Bearer token in the Authorization header. Set the {{base_url}} and {{jwt_token}} variables in your Postman environment.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "menumind-collection-2025"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Get JWT Token (Supabase Auth)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/auth/token", "host": ["{{base_url}}"], "path": ["auth", "token"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"yourpassword\"\n}"
+            },
+            "description": "Obtain a Supabase JWT access token for a user. Use the returned access_token as the Bearer token for all other requests."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Restaurants",
+      "item": [
+        {
+          "name": "Create Restaurant",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/restaurants/", "host": ["{{base_url}}"], "path": ["restaurants", ""] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test Restaurant\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get My Restaurant",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/restaurants/me", "host": ["{{base_url}}"], "path": ["restaurants", "me"] }
+          }
+        },
+        {
+          "name": "Update My Restaurant",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/restaurants/me", "host": ["{{base_url}}"], "path": ["restaurants", "me"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Restaurant Name\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Menus",
+      "item": [
+        {
+          "name": "Create Menu",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/menus/", "host": ["{{base_url}}"], "path": ["menus", ""] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"restaurant_id\": \"{{restaurant_id}}\",\n  \"title\": \"Dinner Menu\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get All Menus",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/menus/", "host": ["{{base_url}}"], "path": ["menus", ""] }
+          }
+        },
+        {
+          "name": "Get Menu by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/menus/{{id}}", "host": ["{{base_url}}"], "path": ["menus", "{{id}}"] }
+          }
+        },
+        {
+          "name": "Update Menu",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/menus/{{id}}", "host": ["{{base_url}}"], "path": ["menus", "{{id}}"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Menu Title\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete Menu",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/menus/{{id}}", "host": ["{{base_url}}"], "path": ["menus", "{{id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Menu Items",
+      "item": [
+        {
+          "name": "Create Menu Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/menu-items/", "host": ["{{base_url}}"], "path": ["menu-items", ""] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"{{id}}\",\n  \"name\": \"Paneer Tikka\",\n  \"description\": \"Grilled paneer with spices\",\n  \"description_source\": \"extracted\",\n  \"price\": \"12.00\",\n  \"category\": \"Appetizers\",\n  \"is_veg\": true,\n  \"spice_level\": \"medium\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Menu Item by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/menu-items/{{item_id}}", "host": ["{{base_url}}"], "path": ["menu-items", "{{item_id}}"] }
+          }
+        },
+        {
+          "name": "List Menu Items by Menu",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/menu-items/menu/{{id}}", "host": ["{{base_url}}"], "path": ["menu-items", "menu", "{{id}}"] }
+          },
+          "description": "Returns all menu items for the specified menu. Requires a valid id and JWT Bearer token. Example: GET /menu-items/menu/123e4567-e89b-12d3-a456-426614174000"
+        },
+        {
+          "name": "Update Menu Item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/menu-items/{{item_id}}", "host": ["{{base_url}}"], "path": ["menu-items", "{{item_id}}"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Paneer Tikka\",\n  \"price\": \"13.00\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete Menu Item",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/menu-items/{{item_id}}", "host": ["{{base_url}}"], "path": ["menu-items", "{{item_id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Menu Parsing (Azure GPT-4o)",
+      "item": [
+        {
+          "name": "Parse Menu Image",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/parse-menu/", "host": ["{{base_url}}"], "path": ["parse-menu", ""] },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "file", "type": "file", "src": "" },
+                { "key": "id", "type": "text", "value": "{{id}}" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Logging",
+      "item": [
+        {
+          "name": "Get Recent Logs (Admin Only)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/logs", "host": ["{{base_url}}"], "path": ["logs"] },
+            "description": "Fetch recent backend logs. This endpoint should be protected and is intended for admin/debug use only. Returns the last N lines of the backend log file."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search",
+      "item": [
+        {
+          "name": "Hybrid RAG Search (Public)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/search?id={{id}}&query=spicy+vegan+starters&category=Appetizer&is_veg=true&price_max=10&limit=5",
+              "host": ["{{base_url}}"],
+              "path": ["search"],
+              "query": [
+                { "key": "id", "value": "{{id}}", "description": "Menu UUID", "disabled": false },
+                { "key": "query", "value": "spicy vegan starters", "description": "Natural language search query", "disabled": false },
+                { "key": "category", "value": "Appetizer", "description": "Menu category (optional)", "disabled": false },
+                { "key": "is_veg", "value": "true", "description": "Vegetarian filter (optional)", "disabled": false },
+                { "key": "price_max", "value": "10", "description": "Maximum price (optional)", "disabled": false },
+                { "key": "limit", "value": "5", "description": "Max results (optional)", "disabled": false }
+              ]
+            },
+            "description": "Hybrid RAG search endpoint. Performs semantic and structured search over menu items for a given menu. No authentication required. Returns ranked menu items based on query and filters."
+          },
+          "response": [
+            {
+              "name": "Sample Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/search?id={{id}}&query=spicy+vegan+starters&category=Appetizer&is_veg=true&price_max=10&limit=5",
+                  "host": ["{{base_url}}"],
+                  "path": ["search"],
+                  "query": [
+                    { "key": "id", "value": "{{id}}" },
+                    { "key": "query", "value": "spicy vegan starters" },
+                    { "key": "category", "value": "Appetizer" },
+                    { "key": "is_veg", "value": "true" },
+                    { "key": "price_max", "value": "10" },
+                    { "key": "limit", "value": "5" }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"item-uuid\",\n      \"name\": \"Chili Tofu\",\n      \"description\": \"Spicy vegan starter...\",\n      \"category\": \"Appetizer\",\n      \"is_veg\": true,\n      \"price\": 8.5,\n      \"distance\": 0.12\n    }\n  ]\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [],
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8000", "type": "string" },
+    { "key": "jwt_token", "value": "", "type": "string" },
+    { "key": "restaurant_id", "value": "", "type": "string" },
+    { "key": "id", "value": "", "type": "string" },
+    { "key": "item_id", "value": "", "type": "string" }
+  ]
+}

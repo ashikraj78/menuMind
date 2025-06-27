@@ -1,0 +1,17 @@
+# Ignore environment files
+backend/.env
+.env
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# VSCode settings
+.vscode/
+
+# Mac system files
+.DS_Store
+
+# Log files
+*.log
