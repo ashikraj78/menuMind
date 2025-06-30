@@ -23,7 +23,7 @@ class MenuItemUpdate(MenuItemBase):
 class MenuItemInDB(MenuItemBase):
     id: UUID
     menu_id: UUID
-    embedding: Optional[str] = None
+    embedding: Optional[list[float]] = None
     created_at: datetime
 
     class Config:

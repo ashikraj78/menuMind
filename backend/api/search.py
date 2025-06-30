@@ -1,5 +1,6 @@
 import json
-from fastapi import APIRouter, Query, HTTPException
+from fastapi import APIRouter, Query, HTTPException, Request
+from backend.core.limiter import limiter
 from typing import Optional, List
 import os
 from openai import AzureOpenAI
@@ -12,7 +13,9 @@ logger = get_logger(__name__)
 router = APIRouter(prefix="/search", tags=["search"])
 
 @router.get("/")
+@limiter.limit("50/minute")
 async def hybrid_search(
+    request: Request,
     menu_id: str = Query(..., description="Menu UUID"),
     query: str = Query(..., description="Natural language search query (e.g., 'spicy chicken under $15')"),
     # These parameters can now be inferred by the LLM, but are kept for explicit filtering if needed
@@ -28,6 +31,7 @@ async def hybrid_search(
     extracted_category = category
     extracted_is_veg = is_veg
     extracted_price_max = price_max
+    query_for_search = query  # Ensure this is always defined
     
     # 1. Use LLM for Function Calling to extract filters from the query
     try:
@@ -129,7 +133,7 @@ async def hybrid_search(
     # 3. Prepare parameters for the dedicated Supabase RPC
     params = {
         "query_embedding": embedding,
-        "search_query": query_for_search, # Use the LLM-refined query for FTS
+        # "search_query": query_for_search, # Use the LLM-refined query for FTS
         "menu_uuid": menu_id,
         "p_category": extracted_category,
         "p_is_veg": extracted_is_veg,

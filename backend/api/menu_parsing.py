@@ -175,7 +175,7 @@ async def parse_menu_image(
                     ],
                 }
             ],
-            "max_tokens": 1024,
+            "max_tokens": 8192,
         }
         logger.info("Calling Azure OpenAI API for menu parsing")
         response = requests.post(AZURE_ENDPOINT, headers=headers, json=body, timeout=60)

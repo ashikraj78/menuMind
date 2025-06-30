@@ -27,6 +27,11 @@ The FastAPI backend is operational, with all core CRUD endpoints and the Azure G
 - **Decimal Serialization Fix:** Update endpoint for menu items now converts Decimal values (e.g., price) to float before sending to Supabase, preventing JSON serialization errors.
 - **Postman Collection Updated:** All endpoints are documented for easy testing.
 - **.env Loading Fixed:** Environment variable loading is robust; backend starts successfully from any working directory.
+- **Search API Rate Limiting:**  
+  - Implemented IP-based rate limiting on the `/search` endpoint using `slowapi` (in-memory backend).
+  - Configured a default policy of 10 requests per minute per IP.
+  - Added middleware and exception handling in `main.py`, and decorated the endpoint in `search.py`.
+  - This provides basic protection against scraping and abuse with minimal operational overhead.
 
 ## 3. Next Steps
 
@@ -43,3 +48,4 @@ The FastAPI backend is operational, with all core CRUD endpoints and the Azure G
 - **AI Prompt Consistency:** Azure GPT-4o prompt is kept in sync with the original mobile implementation for consistent results.
 - **Schema Synchronization:** Backend code and memory bank schema are ahead of the actual Supabase database; migrations must be run to keep the DB in sync with the code and documentation.
 - **Dynamic SQL-to-JSON Pattern:** The new execute_sql function using jsonb_agg is now the standard for dynamic SQL result serialization in this project.
+- **API Abuse Protection:** IP-based rate limiting using `slowapi` is now the standard pattern for protecting public API endpoints from abuse and scraping, starting with the `/search` endpoint.

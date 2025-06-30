@@ -1,5 +1,12 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.middleware import SlowAPIMiddleware
+from backend.core.limiter import limiter
+from slowapi.errors import RateLimitExceeded
+from slowapi.middleware import SlowAPIMiddleware
 from backend.api.restaurants import router as restaurants_router
 from backend.api.menus import router as menus_router
 from backend.api.menu_items import router as menu_items_router
@@ -13,6 +20,11 @@ app = FastAPI(
     description="The backend for the MenuMind application.",
     version="0.1.0",
 )
+
+# Initialize slowapi Limiter (imported from backend.core.limiter)
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+app.add_middleware(SlowAPIMiddleware)
 
 logger = get_logger("MenuMind")
 

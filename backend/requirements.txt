@@ -8,3 +8,5 @@ supabase
 python-multipart
 pgvector
 pydantic-settings
+slowapi
+limits
