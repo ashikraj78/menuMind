@@ -1,0 +1,324 @@
+@import "tailwindcss";
+
+:root {
+  /* Figma Design Colors */
+  --primary-orange: #e95322;
+  --primary-yellow: #f5cb58;
+  --background-gray: #f5f5f5;
+  --text-dark: #391713;
+  --text-white: #f8f8f8;
+  --text-gray: #676767;
+  --accent-yellow: #f3e9b5;
+  --star-gold: #f4ba1b;
+  --background: #ffffff;
+  --foreground: #391713;
+}
+
+@theme inline {
+  --color-primary-orange: #e95322;
+  --color-primary-yellow: #f5cb58;
+  --color-background-gray: #f5f5f5;
+  --color-text-dark: #391713;
+  --color-text-white: #f8f8f8;
+  --color-text-gray: #676767;
+  --color-accent-yellow: #f3e9b5;
+  --color-star-gold: #f4ba1b;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  margin: 0;
+  padding: 0;
+}
+
+/* Responsive container design */
+.responsive-container {
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--primary-yellow);
+  position: relative;
+
+  /* Mobile: Full width with padding */
+  padding: 0;
+
+  /* Tablet: Max width with centered content */
+  @media (min-width: 768px) {
+    max-width: 768px;
+    padding: 0 2rem;
+  }
+
+  /* Desktop: Larger max width */
+  @media (min-width: 1024px) {
+    max-width: 1200px;
+    padding: 0 3rem;
+  }
+
+  /* Large Desktop: Even more space */
+  @media (min-width: 1440px) {
+    max-width: 1400px;
+    padding: 0 4rem;
+  }
+}
+
+/* Restaurant page specific container - maintains mobile-like width */
+.restaurant-container {
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--primary-yellow);
+  position: relative;
+
+  /* Mobile: Full width */
+  max-width: 100%;
+
+  /* Tablet: Slightly wider but constrained */
+  @media (min-width: 768px) {
+    max-width: 480px;
+  }
+
+  /* Desktop: Keep mobile-like experience */
+  @media (min-width: 1024px) {
+    max-width: 520px;
+  }
+
+  /* Large Desktop: Still constrained */
+  @media (min-width: 1440px) {
+    max-width: 560px;
+  }
+}
+
+/* Mobile-first design - keeping for backward compatibility */
+.mobile-container {
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--primary-yellow);
+  position: relative;
+
+  /* Mobile: Full width */
+  max-width: 100%;
+
+  /* Tablet: Constrained width */
+  @media (min-width: 768px) {
+    max-width: 768px;
+  }
+
+  /* Desktop: Larger constraint */
+  @media (min-width: 1024px) {
+    max-width: 1200px;
+  }
+}
+
+/* Responsive header positioning for restaurant */
+.restaurant-header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: 100%;
+
+  /* Mobile: Full width */
+  max-width: 100%;
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    max-width: 480px;
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    max-width: 520px;
+  }
+
+  /* Large Desktop */
+  @media (min-width: 1440px) {
+    max-width: 560px;
+  }
+}
+
+/* Responsive header positioning */
+.responsive-header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: 100%;
+
+  /* Mobile: Full width */
+  max-width: 100%;
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    max-width: 768px;
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    max-width: 1200px;
+  }
+}
+
+/* Responsive category navigation for restaurant */
+.restaurant-category-nav {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: 100%;
+  background: var(--primary-yellow);
+
+  /* Mobile */
+  max-width: 100%;
+  top: 78px;
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    max-width: 480px;
+    top: 100px;
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    max-width: 520px;
+    top: 104px;
+  }
+
+  /* Large Desktop */
+  @media (min-width: 1440px) {
+    max-width: 560px;
+    top: 108px;
+  }
+}
+
+/* Responsive category navigation */
+.responsive-category-nav {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: 100%;
+  background: var(--primary-yellow);
+
+  /* Mobile */
+  max-width: 100%;
+  top: 96px;
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    max-width: 768px;
+    top: 100px;
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    max-width: 1200px;
+    top: 104px;
+  }
+}
+
+/* Responsive bottom interface for restaurant */
+.restaurant-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 100%;
+
+  /* Mobile */
+  max-width: 100%;
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    max-width: 480px;
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    max-width: 520px;
+  }
+
+  /* Large Desktop */
+  @media (min-width: 1440px) {
+    max-width: 560px;
+  }
+}
+
+/* Responsive bottom interface */
+.responsive-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 100%;
+
+  /* Mobile */
+  max-width: 100%;
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    max-width: 768px;
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    max-width: 1200px;
+  }
+}
+
+/* Responsive content spacing */
+.responsive-content {
+  /* Mobile */
+  margin-top: 200px;
+  padding-bottom: 20px;
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    margin-top: 220px;
+    padding-bottom: 24px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    margin-top: 240px;
+    padding-bottom: 32px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-orange);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d64719;
+}
